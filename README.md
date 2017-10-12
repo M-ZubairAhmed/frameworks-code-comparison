@@ -831,31 +831,48 @@ export class ReactiveFormComponent implements OnInit {
 
 ### React
 
-React controlled components naturally keep some internal mutable state and update it based on user input via `setState()`.
+Two techniques exists in React to handle form data i.e Controlled and Uncontrolled. A controlled component keeps internal mutable state and update it based on user input via `setState()`. While in uncontrolled component, form data is handled by DOM itself via `ref`. In most cases, it is recommended to use controlled components to implement forms. 
 
 ```js
-import React from 'react'
+import React from 'react';
 
-export default class ReactForm extends React.Component {
+export default class ReactForm extends React.Component{
   constructor(props) {
     super(props)
     this.state = {
-      formValue: ''
+      email: '',
+      password:'',
     }
   }
 
   handleChange = event => {
-    this.setState({
-      formValue: event.target.value
-    })
+    switch(event.target.name){
+      case "EmailField" :
+        this.setState({ email: event.target.value })
+        break
+      case "PasswordField" :
+        this.setState({ password: event.target.value })
+        break
+    }
   }
 
   render() {
     return (
       <form>
+        <p>Email</p>
         <input
-          value={this.state.formValue}
-          placeholder="Enter value"
+          name="EmailField"
+          type="email"
+          value={this.state.email}
+          placeholder="Enter email address"
+          onChange={this.handleChange}
+        />
+        <p>Password</p>
+        <input
+          name="PasswordField"
+          type="password"
+          value={this.state.password}
+          placeholder="Enter password"
           onChange={this.handleChange}
         />
       </form>
