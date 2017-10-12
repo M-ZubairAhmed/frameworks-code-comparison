@@ -598,7 +598,7 @@ Vue.js provides filters to allow for simple text formatting. The filter utilizes
 Filters are usable within mustache interpolations.
 
 ```html
-<h1>{{ name | lowercase }}</h1> 
+<h1>{{ name | lowercase }}</h1>
 ```
 
 Filters can also be used within the `v-bind` directive.
@@ -607,7 +607,7 @@ Filters can also be used within the `v-bind` directive.
 <div v-bind:slug="slug | formatSlug"></div>
 ```
 
-When creating filters, the function always receives the expression's value. 
+When creating filters, the function always receives the expression's value.
 
 ```js
 new Vue({
@@ -634,7 +634,7 @@ Filters can be created locally like the above example and only be available with
 
 ```js
 Vue.filter('lowercase', word => word.toLowerCase());
-``` 
+```
 
 For global filters to work, they should be declared before the Vue instance.
 
@@ -828,6 +828,42 @@ export class ReactiveFormComponent implements OnInit {
   }
 }
 ```
+
+### React
+
+React controlled components naturally keep some internal mutable state and update it based on user input via `setState()`.
+
+```js
+import React from 'react'
+
+export default class ReactForm extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      formValue: ''
+    }
+  }
+
+  handleChange = event => {
+    this.setState({
+      formValue: event.target.value
+    })
+  }
+
+  render() {
+    return (
+      <form>
+        <input
+          value={this.state.formValue}
+          placeholder="Enter value"
+          onChange={this.handleChange}
+        />
+      </form>
+    )
+  }
+}
+```
+:arrow_right: https://reactjs.org/docs/forms.html#controlled-components
 
 ## Validation
 
@@ -1125,7 +1161,7 @@ class TextInputController {
 
     this.$element = $element;
   }
-  
+
   // The $element can be used after the link stage
   $postLink() {
     const input = this.$element.find('input');
